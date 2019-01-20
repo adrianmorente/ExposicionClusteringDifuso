@@ -88,12 +88,14 @@
 					\centering
 					\includegraphics[width=0.9\textwidth]{k-means-oracle.png}
 					\label{k-means-elbow-point}
-					\caption{Inferencia del número idóneo de centroides a usar en un estudio de agrupamiento - \href{https://www.datascience.com/blog/k-means-clustering}{\textit{Oracle + DataScience}}}
+					\caption{Inferencia del número idóneo de centroides a usar en un estudio de agrupamiento - \href{https://www.datascience.com/blog/k-means-clustering}{\textit{Oracle+DataScience}}}
 				\end{figure}
 				
 				La opción más general reside en repetir el proceso del algoritmo aumentando ligeramente el número de centroides usados, hasta llegar al punto de inflexión donde aumentar este valor no produce una mejora demasiado notable, dado que conforme se incrementa el valor \textit{K}, así lo hace la capacidad computacional requerida para tratar el problema.
 				
 			\subsection{Clasificación de datos según centroide más cercano}
+			
+				Para seguir el modelo basado en centroide, cada uno de los datos presentes en el conjunto se asocia a la clase de la que es representativo el centroide más cercano o similar a dicho dato. Dependiendo del algoritmo, este criterio de asignación a categorías obviamente diferiría en cierto aspecto, pudiendo basarse esta decisión en alguna función de distancia de las comentadas previamente.
 			
 			\subsection{Reposicionamiento de los centroides}
 			
