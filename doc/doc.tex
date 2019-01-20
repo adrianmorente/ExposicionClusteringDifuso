@@ -99,7 +99,13 @@
 			
 			\subsection{Reposicionamiento de los centroides}
 			
+				Dado que los centroides se conocen como los datos más representativos de un grupo, tras producirse cambios en los integrantes de esta categoría, la identidad o descripción de dicho centro probablemente se habrá visto alterada, por lo que deberán recalcularse y reflejarse en el modelo.\\
+				
+				Esto a su vez generará que en las próximas iteraciones los datos puedan cambiar a su vez de centroide más cercano, lo que conllevará una vez más otro reposicionamiento de los centros. Este hecho, como puede apreciarse, podría derivar en un proceso eterno sin convergencia, anulando la efectividad del algoritmo y requiriendo de alguna otra técnica de análisis.
+			
 			\subsection{Condición de parada}
+			
+				El criterio de finalización del algoritmo recae directamente sobre el resultado del apartado anterior, de forma que se considera que el proceso converge y termina cuando los centroides no alteran su posición tras la iteración completa, o bien la alteración es mínima. Como se viene comentando, esta convergencia final puede no encontrarse nunca, como se enumera en las limitaciones de este ejemplo de algoritmo.
 				
 		\section{Limitaciones}
 		
@@ -142,14 +148,14 @@
 				\item $(u_{ik})^m$ el grado de pertenencia asociado a cada distancia elevado a la m-ésima potencia. Cuando $m$ tiende a 1 ($m \rightarrow 1$) el modelo funcionaría cada ves más co mo un modelo clásico, mientras que si $m \rightarrow \infty$ el modelo no daría ningún resultado debido a que el grado de pertenencia de todos los elementos sería $1/C$.
 			\end{itemize}
 		
-			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura \ref{agrupamiento_difuso}
+			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura %\ref{agrupamiento_difuso}%.
 			
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.7\textwidth]{agrupamiento-difuso.png}
-				\label{agrupamiento_difuso}
-				\caption{Proceso de agrupamiento clásico.}
-			\end{figure}
+			%\begin{figure}[h]
+			%	\centering
+			%	\includegraphics[width=0.7\textwidth]{agrupamiento-difuso.png}
+			%	\label{agrupamiento_difuso}
+			%	\caption{Proceso de agrupamiento clásico.}
+			%\end{figure}
 						
 			El ejemplo anterior que no se ha podido resolver con el modelo clásico, se va a tratar de resolver con este nuevo enfoque. Como se vio en el ejemplo, el dato situado en medio de los dos grupos no se sabía a cual de ellos pertenecía.\\
 			
