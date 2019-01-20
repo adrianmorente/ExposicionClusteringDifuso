@@ -54,7 +54,67 @@
 				\item \textbf{Núcleo o \textit{kernel}}: son clases de algoritmos para análisis de patrones, donde la tarea general es encontrar y estudiar tipos de relaciones en conjuntos de datos. En su definición más simple, implican la transformación de datos en otras dimensiones cuyo margen divisorio de los elementos es más acentuado y permite una visualización y categorización más claras.
 			\end{itemize}
 		
+		\section{Modelos de agrupamiento clásico}
+		
+			Durante el estudio de conjuntos de datos basado en agrupamientos y/o categorización, se pueden seguir diversos modelos que condicionarán el contenido de los grupos resultantes. Esto es, el resultado diferirá en función del criterio seguido para asignar una categoría u otra a cada uno de los datos presentes en el conjunto. Veamos algunos de los modelos posibles:
+		
+			\begin{itemize}
+				\item \textbf{Conectividad}: el criterio seguido para categorizar cada uno de los elementos se corresponde con la cercanía que tenga un determinado dato con el resto. Por ejemplo, si en un espacio tridimensional un dato sin categoría se encontrase a una distancia euclídea de 10 de un elemento de clase A, y a una distancia 5 de un dato de clase B; se inferiría que el elemento estudiado comparte más similitud con los datos de la segunda clase, y se categorizaría dentro de ella.
+				\item \textbf{Basado en centroide}: en este caso, se seguiría una especie de modelo guiado por conectividad con la salvedad de que las distancias se calcularían respecto a cada uno de los centroides presentes en el modelo, y dicho elemento se clasificaría dentro de la clase a la que está asignado el centroide más cercano.
+				\item \textbf{Basado en distribuciones}: es el más estrechamente ligado a los modelos y fundamentos estadísticos. Los clústeres son definidos por objetos que pertenecen mayormente a la misma distribución. Producen modelos complejos con que capturar correlación y dependencia entre atributos de los datos estudiados. A menos que se establezcan unos límites sobre la complejidad del modelo, el \textit{sampling} de datos aleatorios de forma estadística puede afectar negativamente causando \textbf{sobreajuste}.
+				\item \textbf{Basado en densidad}: en este modelo, los grupos son definidos a modo de áreas donde la densidad de datos es mayor que en el resto del conjunto. Los objetos que se encuentran esparcidos por el espacio sin acercarse a ningún área, se consideran \textit{ruido} o \textbf{puntos frontera}.
+			\end{itemize}
+		
+		\section{Proceso y algoritmo}
+		
+			El proceso de clasificación de datos en clases es relativamente sencillo, y se puede explicar de forma ejemplificada según el conocido algoritmo \textbf{\textit{K-means}} (o \textit{K-medias} en español), que asigna clases a los datos no categorizados en función del centroide más cercano:
+		
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.7\textwidth]{agrupamiento-clasico.png}
+				\label{clustering-algorithm}
+				\caption{Proceso de agrupamiento clásico}
+			\end{figure}
+		
+			Describamos ligeramente el proceso ilustrado arriba:
+			
+			\subsection{Inicialización de centroides}
+			
+				Consiste en colocar los centroides de forma generalmente aleatoria, dado que tomarán una posición más relevante a lo largo del proceso, conforme se vayan asignando datos a sus clases.\\
+				
+				La decisión más importante aquí es el número de centroides que se utilizan, aunque esta decisión goza de fácil solución si repetimos el algoritmo para distinto valor de este número, como podemos ver en la siguiente imagen:
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=0.9\textwidth]{k-means-oracle.png}
+					\label{k-means-elbow-point}
+					\caption{Inferencia del número idóneo de centroides a usar en un estudio de agrupamiento - \href{https://www.datascience.com/blog/k-means-clustering}{\textit{Oracle + DataScience}}}
+				\end{figure}
+				
+				La opción más general reside en repetir el proceso del algoritmo aumentando ligeramente el número de centroides usados, hasta llegar al punto de inflexión donde aumentar este valor no produce una mejora demasiado notable, dado que conforme se incrementa el valor \textit{K}, así lo hace la capacidad computacional requerida para tratar el problema.
+				
+			\subsection{Clasificación de datos según centroide más cercano}
+			
+			\subsection{Reposicionamiento de los centroides}
+			
+			\subsection{Condición de parada}
+				
 		\section{Limitaciones}
+		
+			Lógicamente, estas aproximaciones basadas en agrupamiento clásico sufren de algunas limitaciones:
+			
+			\begin{itemize}
+				\item Cada uno de los datos del conjunto solo pueden pertenecer a un \textit{cluster} (o lo que es lo mismo, ser asignados a una clase). Lógicamente no se contempla la posibilidad de que un elemento pueda compartir similitud gradual con diversas categorías, lo que aleja el estudio de los datos de la posible solución más favorable o descriptiva.
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=0.5\textwidth]{Artboard1.jpg}
+					\label{clustering2}
+					\caption{Problema en la asignación de un dato en clustering clásico. ¿Qué categoría asignar al punto blanco?}
+				\end{figure}
+			
+				\item Los mecanismos de exploración y clasificación de los datos no aseguran \textbf{convergencia}. El continuo cálculo de los centroides podría mantenerse eternamente efectuando las mismas operaciones repetitivas cuyo reposicionamiento de estos datos representativos alternase siempre de igual forma. Si existiese un mecanismo que permitiese relajar esta limitación, la inferencia extraída finalmente del estudio sería más descriptiva y ajustada a los datos reales.
+			\end{itemize}
 	
 	\chapter{Agrupamiento difuso}
 		Tal y como se acaba de ver, el agrupamiento clásico tiene una limitación bastante importante y es la de que un sólo dato puede pertenecer a un \textit{cluster}. Esto también tiene la consecuencia de que, dependiendo del algoritmo de agrupamiento que se vaya a emplear, no se puede garantizar la convergencia del mismo.
