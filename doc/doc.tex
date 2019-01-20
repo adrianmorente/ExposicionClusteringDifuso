@@ -122,8 +122,40 @@
 		A demás, si se usan redes neuronales para llevar a cabo la labor de agrupar los datos, es natural y lógico pensar que un sólo dato va a provocar la activación de más de una neurona. Es por ello que se tiene que cambiar el modelo clásico a uno más permisivo en el cual se solucionen dichos problemas.
 			
 		\section{Definición}
+			Como se ha dejado entrever, el agrupamiento difuso permite que un dato pueda pertenecer a varios \textit{clusters} a la vez. Esto es posible debido a que al modelo clásico se le añade el concepto de \textit{función de pertenencia} que es propio de la lógica difusa.
 			
+			De hecho, en este modelo, un dato tiene $C$ grados de pertenencia, siendo $C$ el número de \textit{clusters} en los que se quiere agrupar los datos. La única limitación que tiene este modelo es que la sumatoria de los grados de pertenencia de un dato tiene que ser 1, es decir:
+			
+			$$\sum_{i=1}^c\mu_i(x_j) = 1, \forall j$$
+			
+			luego: $0 \leq \mu_i(x) \leq 1, \forall i=1,...,C$, es decir, el grado de pertenencia de cualquier dato en un \textit{cluster} tiene que estar en el intervalo cerrado [0,1].
+			
+			No obstante, la función que el agrupamiento clásico quiere minimizar no varía en su esencia:
+			
+			$$J_m(U,v) = \sum_{k=1}^n \sum_{i=1}^c (u_{ik}^m d^2_{ik}$$
+
+			siendo:
+			\begin{itemize}
+				\item $d^2_{ik}$ la distancia entre los elementos y los centroides de los grupos.
+				\item $(u_{ik})^m$ el grado de pertenencia asociado a cada distancia elevado a la m-ésima potencia. Cuando $m$ tiende a 1 ($m \rightarrow 1$) el modelo funcionaría cada ves más como un modelo clásico, mientras que si $m \rightarrow \infty$ el modelo no daría ningún resultado debido a que el grado de pertenencia de todos los elementos sería $1/C$.
+			\end{itemize}
+						
+			El ejemplo anterior que no se ha podido resolver con el modelo clásico, se va a tratar de resolver con este nuevo enfoque. Como se vio en el ejemplo, el dato situado en medio de los dos grupos no se sabía a cual de ellos pertenecía. 
+			
+			Ahora, tras meter grados de pertenencia se puede resolver de manera trivial como se muestra en la siguiente figura:
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.5\textwidth]{clustering_difuso.jpg}
+				\label{clustering_difuso}
+				\caption{Ilustración de ejemplo de Agrupamiento Difuso. \href{https://github.com/adrianmorente/ExposicionClusteringDifuso/blob/master/doc/imagenes/clustering\_difuso.jpg}{ \textit{(Ilustración propia)}}}
+			\end{figure}
 		
+			Como se puede observar gráficamente en la figura \ref{clustering_difuso}, cada \textit{cluster} forma una función de pertenencia centrada en el \textit{centroide} del mismo. Conforme se aleja del \textit{centroide} la función de pertenencia disminuye y se puede observar como el dato que se encuentra entre los dos grupos toma el mismo valor de pertenencia en los dos grupos.
+			
+			Este hecho nos da información de que realmente ese dato se clasificaría diferente si se aumenta el números de \textit{clusters} a 3. Para entender esto se propone el siguiente ejemplo. 
+			
+			Imaginemos que se quieren agrupar vehículos en dos clases: una clase \textit{turismo} y otra \textit{camión}. En el momento de clasificar una \textit{furgoneta}, sería imposible clasificarla en uno de estos dos grupos debido a que, en realidad, una \textit{furgoneta} es una mezcla entre un \textit{turismo} y un \textit{camión}, lo que sería otra clase distinta a estas.
 		\section{Limitaciones}
 	
 	\chapter{Agrupamiento difuso posibilístico}
