@@ -148,42 +148,61 @@
 				\item $(u_{ik})^m$ el grado de pertenencia asociado a cada distancia elevado a la m-ésima potencia. Cuando $m$ tiende a 1 ($m \rightarrow 1$) el modelo funcionaría cada ves más co mo un modelo clásico, mientras que si $m \rightarrow \infty$ el modelo no daría ningún resultado debido a que el grado de pertenencia de todos los elementos sería $1/C$.
 			\end{itemize}
 		
-			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura %\ref{agrupamiento_difuso}%.
-			
-			%\begin{figure}[h]
-			%	\centering
-			%	\includegraphics[width=0.7\textwidth]{agrupamiento-difuso.png}
-			%	\label{agrupamiento_difuso}
-			%	\caption{Proceso de agrupamiento clásico.}
-			%\end{figure}
-						
-			El ejemplo anterior que no se ha podido resolver con el modelo clásico, se va a tratar de resolver con este nuevo enfoque. Como se vio en el ejemplo, el dato situado en medio de los dos grupos no se sabía a cual de ellos pertenecía.\\
-			
-			Ahora, tras meter grados de pertenencia se puede resolver de manera trivial como se muestra en la siguiente figura:
+			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura \ref{agrupamiento_difuso}.
 			
 			\begin{figure}[h]
 				\centering
-				\includegraphics[width=0.5\textwidth]{clustering_difuso.jpg}
-				\label{clustering_difuso}
-				\caption{Ilustración de ejemplo de la función de pertenencia en Agrupamiento Difuso.}
+				\includegraphics[width=0.7\textwidth]{agrupamiento-difuso.png}
+				\label{agrupamiento_difuso}
+				\caption{Proceso de agrupamiento clásico.}
 			\end{figure}
 		
-			Como se puede observar gráficamente en la figura \ref{clustering_difuso}, cada \textit{cluster} forma una función de pertenencia centrada en el \textit{centroide} del mismo. Conforme se aleja del \textit{centroide} la función de pertenencia disminuye y se puede observar como el dato que se encuentra entre los dos grupos toma el mismo valor de pertenencia en los dos grupos.\\
+			\subsection{Aplicación}
+						
+				El ejemplo anterior que no se ha podido resolver con el modelo clásico, se va a tratar de resolver con este nuevo enfoque. Como se vio en el ejemplo, el dato situado en medio de los dos grupos no se sabía a cual de ellos pertenecía.\\
+				
+				Ahora, tras meter grados de pertenencia se puede resolver de manera trivial como se muestra en la siguiente figura:
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=0.5\textwidth]{clustering_difuso.jpg}
+					\label{clustering_difuso}
+					\caption{Ilustración de ejemplo de la función de pertenencia en Agrupamiento Difuso.}
+				\end{figure}
 			
-			Este hecho da la información de que realmente ese dato se clasificaría diferente si se aumenta el números de \textit{clusters} a 3. Para entender esto se propone el siguiente ejemplo.\\
-			
-			Imaginemos que se quieren agrupar vehículos en dos clases: una clase \textit{turismo} y otra \textit{camión}. En el momento de clasificar una \textit{furgoneta}, sería imposible clasificarla en uno de estos dos grupos debido a que, en realidad, una \textit{furgoneta} es una mezcla entre un \textit{turismo} y un \textit{camión}, lo que sería otra clase distinta a estas.\\
-			
-			Dicho esto, el dato del ejemplo de la figura se puede comparar con la \textit{furgoneta} con lo que se le podría dar un color naranja, mezcla entre rojo y amarillo. Dicho color sería más rojo si el dato se acercase al grupo rojo o más amarillo en caso contrario.
-			
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.5\textwidth]{clustering_difuso_solucion.jpg}
-				\label{clustering_difuso_solucion}
-				\caption{Ilustración de ejemplo resuelta tras usar Agrupamiento Difuso.}
-			\end{figure}
+				Como se puede observar gráficamente en la figura \ref{clustering_difuso}, cada \textit{cluster} forma una función de pertenencia centrada en el \textit{centroide} del mismo. Conforme se aleja del \textit{centroide} la función de pertenencia disminuye y se puede observar como el dato que se encuentra entre los dos grupos toma el mismo valor de pertenencia en los dos grupos.\\
+				
+				Este hecho da la información de que realmente ese dato se clasificaría diferente si se aumenta el números de \textit{clusters} a 3. Para entender esto se propone el siguiente ejemplo.\\
+				
+				Imaginemos que se quieren agrupar vehículos en dos clases: una clase \textit{turismo} y otra \textit{camión}. En el momento de clasificar una \textit{furgoneta}, sería imposible clasificarla en uno de estos dos grupos debido a que, en realidad, una \textit{furgoneta} es una mezcla entre un \textit{turismo} y un \textit{camión}, lo que sería otra clase distinta a estas.\\
+				
+				Dicho esto, el dato del ejemplo de la figura se puede comparar con la \textit{furgoneta} con lo que se le podría dar un color naranja, mezcla entre rojo y amarillo. Dicho color sería más rojo si el dato se acercase al grupo rojo o más amarillo en caso contrario.
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=0.5\textwidth]{clustering_difuso_solucion.jpg}
+					\label{clustering_difuso_solucion}
+					\caption{Ilustración de ejemplo resuelta tras usar Agrupamiento Difuso.}
+				\end{figure}
 		
 		\section{Limitaciones}
+		
+			Aunque este modelo ha resuelto el problema de clasificar un dato que se encuentra entre dos o más grupos totalmente definidos, tiene deficiencias debido a la dureza de su restricción $\sum_{i=1}^c\mu_i(x_j) = 1, \forall j$.\\
+			
+			El caso más visible donde este modelo encuentra limitaciones se produce cuando en los datos hay los llamados \textit{outliers}. Estos son datos que por error de medición o porque realmente es un dato que se sale de la población son distantes al resto de datos, lo que genera mucha variabilidad en los mismos.\\
+			
+			Para ver de forma más clara esta limitación, se ha decidido realizar la siguiente ilustración que añade un nuevo dato \textit{outlier} a los datos que ya se habían clasificado previamente.
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.5\textwidth]{problema-agrupamiento-difuso.jpg}
+				\label{clustering_difuso_problema}
+				\caption{Ilustración de ejemplo de la limitación del Agrupamiento Difuso.}
+			\end{figure}
+			
+			Como se puede apreciar en la figura \ref{clustering_difuso_problema}, la función de pertenencia del conjunto de los puntos amarillos se tiene que extender de forma lógica para satisfacer la restricción de que la sumatoria de grados de pertenencia del punto más alejado tiene que ser 1. De esta manera, este punto, que a simple vista no pertenecería al grupo, entra a formar parte del núcleo o \textit{core} del conjunto. Esto implica que otros puntos ya no formarían parte del \textit{core} teniendo un menor grado de pertenencia en el grupo.\\
+			
+			El punto que anteriormente se había pintado naranja, ahora su tonalidad sería más rojiza debido al desplazamiento de la función de pertenencia del grupo amarillo. Este es un ejemplo con dos grupos pero, si hubiese más grupos el impacto de este \textit{outlier} sería más grande.
 	
 	\chapter{Agrupamiento difuso posibilístico}
 	
