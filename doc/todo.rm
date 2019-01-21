@@ -1,0 +1,5 @@
+- [ ] Función objetivo agrupamiento clásico
+- [ ] Añadir imágenes explicativas a los modelos de agrupamiento clásico
+- [ ] Explicar en los modelos de agrupamiento clásico que todo lo que se va a hacer es con el modelo basado en centroide
+- [ ] Explicar cómo se obtiene U en el agrupamiento difuso
+- [ ] Terminar agrupamiento difuso posibiliístico

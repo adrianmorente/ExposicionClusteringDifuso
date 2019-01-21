@@ -138,15 +138,17 @@
 			
 			luego: $0 \leq \mu_i(x) \leq 1, \forall i=1,...,C$, es decir, el grado de pertenencia de cualquier dato en un \textit{cluster} tiene que estar en el intervalo cerrado [0,1].\\
 			
-			No obstante, la función que el agrupamiento clásico quiere minimizar no varía en su esencia:
+			No obstante, la función objetivo que el agrupamiento clásico quiere minimizar no varía en su esencia:
 			
 			$$J_m(U,v) = \sum_{k=1}^n \sum_{i=1}^c (u_{ik})^m d^2_{ik}$$
 
 			siendo:
 			\begin{itemize}
-				\item $d^2_{ik}$ la distancia entre los elementos y los centroides de los grupos.
+				\item $d^2_{ik}$ la distancia entre los elementos y los centroides de los grupos calculada de igual manera que en el agrupamiento clásico ($d^2_{ik} = ||x_k-v_i||^2$, siendo $v$ el vector de controides).
 				\item $(u_{ik})^m$ el grado de pertenencia asociado a cada distancia elevado a la m-ésima potencia. Cuando $m$ tiende a 1 ($m \rightarrow 1$) el modelo funcionaría cada ves más co mo un modelo clásico, mientras que si $m \rightarrow \infty$ el modelo no daría ningún resultado debido a que el grado de pertenencia de todos los elementos sería $1/C$.
 			\end{itemize}
+		
+			EXPLICAR CÓMO SE OBTIENE U\\\\
 		
 			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura \ref{agrupamiento_difuso}.
 			
@@ -206,8 +208,28 @@
 	
 	\chapter{Agrupamiento difuso posibilístico}
 	
-		\section{Definición}
+		A pesar de que el agrupamiento difuso corrige ciertas limitaciones que tiene el agrupamiento clásico, este modelo no es del todo perfecto. Como se ha comprobado, los \textit{outliers} afectan muy negativamente al modelo de agrupamiento difuso al tener una restricción tan fuerte.\\
+		
+		Es por este motivo el nacimiento de un nuevo modelo para corregir las deficiencias del anterior en conjuntos de datos con ruido.
 	
+		\section{Definición}
+		
+		Al igual que el modelo de agrupamiento difuso, este permite que un dato pueda pertenecer a varios \textit{clusters} a la vez con cierto grado de pertenencia. La diferencia de este modelo con el anterior es que la sumatoria de los grados de pertenencia de un dato no tiene que ser uno.
+		
+		Esta condición se relaja de tener que ser estrictamente 1 a exigir solamente que al menos uno de los grados de pertenencia sea positivo, más concretamente estar comprendido en un intervalo [0,1], es decir:
+		
+		$$ 0 \leq \sum_{i=1}^c\mu_i(x_j) \leq 1, \forall j $$
+		
+		Con esta condición relajada, la función objetivo del agrupamiento difuso, $J_m(U,v) = \sum_{k=1}^n \sum_{i=1}^c (u_{ik})^m d^2_{ik}$, se resolvería trivialmente dando como resultado todo los valores de pertenencia a cero con lo que el modelo no sirve para nada. Para arreglar esto, a dicha función objetivo se le añade un nuevo término quedando:
+		
+		$$J_m(U,v,\eta) = \sum_{k=1}^n \sum_{i=1}^c (u_{ik})^m d^2_{ik} + \sum_{i=1}^c \eta _i \sum_{k=1}^n (1-i_{ik})^m$$
+		
+		Siendo el nuevo vector $\eta = (\eta_1,...,\eta_C)$ de valores positivos la distancia desde los centroides a la que el grado de pertenencia de un dato es 0.5. Este vector se calcula usando la siguiente fórmula:
+		
+		$$\eta_i = K \frac{\sum_{j=1}^n u_{ij}^m d_{ij}^2}{\sum_{j=1}^n u_{ij}^m}$$
+		
+		Donde $K$ es normalmente 1.
+		
 	\chapter{Aplicaciones reales}
 	
 		La parte teórica de una técnica no es más que un hecho meramente descriptivo si no se utiliza de forma real para resolver problemas existentes en la sociedad, por lo que para justificar este método de empleo de la lógica difusa se comentarán algunos casos de uso verdaderos donde este agrupamiento facilita la categorización de múltiples variantes de datos.\\
