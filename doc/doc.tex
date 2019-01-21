@@ -150,7 +150,7 @@
 		
 			Para el cálculo de $U$ previamente se necesitan tener calculados los centroides tal y como se hace en el método clásico. Una vez se tiene calculado el vector $v$, el cálculo de los componentes de $U$ se realizaría aplicando:
 			
-			$$u_{ik} = (\sum_{j=1}^c(\frac{d _{ik}}{d_{jk}})^{\frac{2}{m-1}})^{-1} ; 1 \leq x \leq n; 1\leq i \leq c $$
+			$$u_{ik} = (\sum_{j=1}^c(\frac{d _{ik}}{d_{jk}})^{\frac{2}{m-1}})^{-1} ; 1 \leq k \leq n; 1\leq i \leq c $$
 		
 			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura \ref{agrupamiento_difuso}.
 			
@@ -158,7 +158,7 @@
 				\centering
 				\includegraphics[width=0.7\textwidth]{agrupamiento-difuso.png}
 				\label{agrupamiento_difuso}
-				\caption{Proceso de agrupamiento clásico.}
+				\caption{Proceso de agrupamiento difuso.}
 			\end{figure}
 		
 			\subsection{Aplicación}
@@ -216,7 +216,7 @@
 	
 		\section{Definición}
 		
-		Al igual que el modelo de agrupamiento difuso, este permite que un dato pueda pertenecer a varios \textit{clusters} a la vez con cierto grado de pertenencia. La diferencia de este modelo con el anterior es que la sumatoria de los grados de pertenencia de un dato no tiene que ser uno.
+		Al igual que el modelo de agrupamiento difuso, este permite que un dato pueda pertenecer a varios \textit{clusters} a la vez con cierto grado de pertenencia. La diferencia de este modelo con el anterior es que la sumatoria de los grados de pertenencia de un dato no tiene que ser uno.\\
 		
 		Esta condición se relaja de tener que ser estrictamente 1 a exigir solamente que al menos uno de los grados de pertenencia sea positivo, más concretamente estar comprendido en un intervalo [0,1], es decir:
 		
@@ -230,8 +230,38 @@
 		
 		$$\eta_i = K \frac{\sum_{j=1}^n u_{ij}^m d_{ij}^2}{\sum_{j=1}^n u_{ij}^m}$$
 		
-		Donde $K$ es normalmente 1.
+		Donde $K$ es normalmente 1.\\
 		
+		Una vez se ha calculado el vector posibilístico, con estos valores se calcula la matriz difusa $U$ de forma similar al método difuso pero usando los valores posibilísticos:
+		
+		$$u_{ik} = (1+(\frac{d _{ik}}{\eta_i})^{\frac{1}{m-1}})^{-1} ; 1 \leq k \leq n; 1\leq i \leq c $$
+		
+		Introducida esta nueva matriz (vector) posibilística, la estructura del algoritmo no sufre cambios significativos debido a que solo se agrega ese paso tal y como se puede observar en el siguiente diagrama de flujo.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.7\textwidth]{agrupamiento-posibilistico.png}
+			\label{agrupamiento_posibilistico}
+			\caption{Proceso de agrupamiento difuso posibilístico.}
+		\end{figure}
+		
+		\subsection{Aplicación}
+			
+			Volviendo al ejemplo sobre el que se ha estado trabajando y poniendo casuísticas para mostrar las limitaciones de los anteriores modelos, se puede ver en la figura \ref{clustering_posibilistico} como este último modelo soluciona el problema que tenía el anterior.
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.5\textwidth]{clustering-posibilistico.jpg}
+				\label{clustering_posibilistico}
+				\caption{Ilustración de ejemplo de la mejora del Agrupamiento Difuso Posibilístico.}
+			\end{figure}
+		
+			El \textit{outlier} ya no forma parte del \textit{core} de ningún conjunto haciendo que el modelo pueda clasificar de mejor manera a los elementos.\\
+			
+			Un ejemplo similar, volviendo con la clasificación de vehículos en las clases \textit{turismo} y \textit{camión} sería intentando clasificar un \textit{trailer}. En el modelo difuso, el \textit{trailer} estaría dentro del \textit{core} del conjunto de los \textit{camiones}, es decir, todos los camiones son muy similares a los trailers, afirmación que no es cierta.\\
+			
+			Con este modelo difuso posibilístico, el \textit{trailer} no formaría parte del \textit{core} de los camiones pero sí que se parecería, en cierto grado (de pertenencia) a los camiones.
+
 	\chapter{Aplicaciones reales}
 	
 		La parte teórica de una técnica no es más que un hecho meramente descriptivo si no se utiliza de forma real para resolver problemas existentes en la sociedad, por lo que para justificar este método de empleo de la lógica difusa se comentarán algunos casos de uso verdaderos donde este agrupamiento facilita la categorización de múltiples variantes de datos.\\
