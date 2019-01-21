@@ -1,12 +1,11 @@
-- [ ] Función objetivo agrupamiento clásico
+- Función objetivo agrupamiento clásico
    - Cálculo de los centroides: https://wikimedia.org/api/rest_v1/media/math/render/svg/a69fb5f14b8453e8f6ffbc828ba5a98e855ca2a4 (https://es.wikipedia.org/wiki/Fuzzy_clustering)
-- [ ] Añadir imágenes explicativas a los modelos de agrupamiento clásico
+-  Añadir imágenes explicativas a los modelos de agrupamiento clásico
    - https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68
    - Conectividad https://dashee87.github.io/images/scikit_clustering_13_1.png
    - Centroide https://dashee87.github.io/images/scikit_clustering_5_0.png
    - Distribuciones
    - Densidad
-- [ ] Explicar en los modelos de agrupamiento clásico que todo lo que se va a hacer es con el modelo basado en centroide
-- [ ] Terminar agrupamiento difuso posibiliístico
+- Explicar en los modelos de agrupamiento clásico que todo lo que se va a hacer es con el modelo basado en centroide
 
-- [ ] Revisar posición y referencias de las imágenes
+- Revisar posición y referencias de las imágenes
