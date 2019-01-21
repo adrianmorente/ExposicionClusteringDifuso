@@ -148,7 +148,9 @@
 				\item $(u_{ik})^m$ el grado de pertenencia asociado a cada distancia elevado a la m-ésima potencia. Cuando $m$ tiende a 1 ($m \rightarrow 1$) el modelo funcionaría cada ves más co mo un modelo clásico, mientras que si $m \rightarrow \infty$ el modelo no daría ningún resultado debido a que el grado de pertenencia de todos los elementos sería $1/C$.
 			\end{itemize}
 		
-			EXPLICAR CÓMO SE OBTIENE U\\\\
+			Para el cálculo de $U$ previamente se necesitan tener calculados los centroides tal y como se hace en el método clásico. Una vez se tiene calculado el vector $v$, el cálculo de los componentes de $U$ se realizaría aplicando:
+			
+			$$u_{ik} = (\sum_{j=1}^c(\frac{d _{ik}}{d_{jk}})^{\frac{2}{m-1}})^{-1} ; 1 \leq x \leq n; 1\leq i \leq c $$
 		
 			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura \ref{agrupamiento_difuso}.
 			
