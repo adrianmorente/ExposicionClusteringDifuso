@@ -65,47 +65,68 @@
 				\item \textbf{Basado en densidad}: en este modelo, los grupos son definidos a modo de áreas donde la densidad de datos es mayor que en el resto del conjunto. Los objetos que se encuentran esparcidos por el espacio sin acercarse a ningún área, se consideran \textit{ruido} o \textbf{puntos frontera}.
 			\end{itemize}
 		
-		\section{Proceso y algoritmo}
+		\section{Ejemplo: \textit{K-medias}}
 		
-			El proceso de clasificación de datos en clases es relativamente sencillo, y se puede explicar de forma ejemplificada según el conocido algoritmo \textbf{\textit{K-means}} (o \textit{K-medias} en español), que asigna clases a los datos no categorizados en función del centroide más cercano:
+			Para terminar de afianzar los fundamentos introducidos por el agrupamiento clásico en ciencia de datos, es conveniente arrojar luz sobre el tema con un ejemplo sobre el conocido y usado algoritmo en este ámbito, como lo es \textbf{K-medias} (o \textit{K-means}, en inglés) \cite{k-means}.
 		
-			\begin{figure}[h]
-				\centering
-				\includegraphics[width=0.7\textwidth]{agrupamiento-clasico.png}
-				\label{clustering-algorithm}
-				\caption{Proceso de agrupamiento clásico}
-			\end{figure}
+			\subsection{Proceso}
 		
-			Describamos ligeramente el proceso ilustrado arriba:
+				El proceso de clasificación de datos es relativamente sencillo: reside en asignar clases a los datos no categorizados en función del centroide más cercano. Como se ha introducido, cada uno de estos centros representan una clase, a la que será asignado el dato en estudio según la distancia que los separe. Véase la figura \ref{clustering-algorithm}.
 			
-			\subsection{Inicialización de centroides}
-			
-				Consiste en colocar los centroides de forma generalmente aleatoria, dado que tomarán una posición más relevante a lo largo del proceso, conforme se vayan asignando datos a sus clases.\\
-				
-				La decisión más importante aquí es el número de centroides que se utilizan, aunque esta decisión goza de fácil solución si repetimos el algoritmo para distinto valor de este número, como podemos ver en la siguiente imagen:
-				
 				\begin{figure}[h]
 					\centering
-					\includegraphics[width=0.9\textwidth]{k-means-oracle.png}
-					\label{k-means-elbow-point}
-					\caption{Inferencia del número idóneo de centroides a usar en un estudio de agrupamiento - \href{https://www.datascience.com/blog/k-means-clustering}{\textit{Oracle+DataScience}}}
+					\includegraphics[width=0.7\textwidth]{agrupamiento-clasico.png}
+					\label{clustering-algorithm}
+					\caption{Proceso de agrupamiento clásico}
 				\end{figure}
+			
+				Describamos ligeramente el proceso ilustrado por dicha figura en el siguiente apartado.
 				
-				La opción más general reside en repetir el proceso del algoritmo aumentando ligeramente el número de centroides usados, hasta llegar al punto de inflexión donde aumentar este valor no produce una mejora demasiado notable, dado que conforme se incrementa el valor \textit{K}, así lo hace la capacidad computacional requerida para tratar el problema.
+				\subsubsection{Inicialización de centroides}
 				
-			\subsection{Clasificación de datos según centroide más cercano}
-			
-				Para seguir el modelo basado en centroide, cada uno de los datos presentes en el conjunto se asocia a la clase de la que es representativo el centroide más cercano o similar a dicho dato. Dependiendo del algoritmo, este criterio de asignación a categorías obviamente diferiría en cierto aspecto, pudiendo basarse esta decisión en alguna función de distancia de las comentadas previamente.
-			
-			\subsection{Reposicionamiento de los centroides}
-			
-				Dado que los centroides se conocen como los datos más representativos de un grupo, tras producirse cambios en los integrantes de esta categoría, la identidad o descripción de dicho centro probablemente se habrá visto alterada, por lo que deberán recalcularse y reflejarse en el modelo.\\
+					Consiste en colocar los centroides de forma generalmente aleatoria, dado que tomarán una posición más relevante a lo largo del proceso, conforme se vayan asignando datos a sus clases.\\
+					
+					La decisión más importante aquí es el número de centroides que se utilizan, aunque esta decisión goza de fácil solución si repetimos el algoritmo para distinto valor de este número, como podemos ver en la siguiente imagen:
+					
+					\begin{figure}[h]
+						\centering
+						\includegraphics[width=0.9\textwidth]{k-means-oracle.png}
+						\label{k-means-elbow-point}
+						\caption{Inferencia del número idóneo de centroides a usar en un estudio de agrupamiento - \href{https://www.datascience.com/blog/k-means-clustering}{\textit{Oracle+DataScience}}}
+					\end{figure}
+					
+					La opción más general reside en repetir el proceso del algoritmo aumentando ligeramente el número de centroides usados, hasta llegar al punto de inflexión donde aumentar este valor no produce una mejora demasiado notable, dado que conforme se incrementa el valor \textit{K}, así lo hace la capacidad computacional requerida para tratar el problema.
+					
+				\subsubsection{Clasificación de datos según centroide más cercano}
 				
-				Esto a su vez generará que en las próximas iteraciones los datos puedan cambiar a su vez de centroide más cercano, lo que conllevará una vez más otro reposicionamiento de los centros. Este hecho, como puede apreciarse, podría derivar en un proceso eterno sin convergencia, anulando la efectividad del algoritmo y requiriendo de alguna otra técnica de análisis.
+					Para seguir el modelo basado en centroide, cada uno de los datos presentes en el conjunto se asocia a la clase de la que es representativo el centroide más cercano o similar a dicho dato. Dependiendo del algoritmo, este criterio de asignación a categorías obviamente diferiría en cierto aspecto, pudiendo basarse esta decisión en alguna función de distancia de las comentadas previamente.
+				
+				\subsubsection{Reposicionamiento de los centroides}
+				
+					Dado que los centroides se conocen como los datos más representativos de un grupo, tras producirse cambios en los integrantes de esta categoría, la identidad o descripción de dicho centro probablemente se habrá visto alterada, por lo que deberán recalcularse y reflejarse en el modelo.\\
+					
+					Esto a su vez generará que en las próximas iteraciones los datos puedan cambiar a su vez de centroide más cercano, lo que conllevará una vez más otro reposicionamiento de los centros. Este hecho, como puede apreciarse, podría derivar en un proceso eterno sin convergencia, anulando la efectividad del algoritmo y requiriendo de alguna otra técnica de análisis.
+				
+				\subsubsection{Condición de parada}
+				
+					El criterio de finalización del algoritmo recae directamente sobre el resultado del apartado anterior, de forma que se considera que el proceso converge y termina cuando los centroides no alteran su posición tras la iteración completa, o bien la alteración es mínima. Como se viene comentando, esta convergencia final puede no encontrarse nunca, como se enumera en las limitaciones de este ejemplo de algoritmo.
+					
+			\subsection{Definición matemática}
 			
-			\subsection{Condición de parada}
+				Siguiendo con el algoritmo \textit{K-medias} utilizado como ejemplo, véase la fórmula que lo define matemáticamente:
 			
-				El criterio de finalización del algoritmo recae directamente sobre el resultado del apartado anterior, de forma que se considera que el proceso converge y termina cuando los centroides no alteran su posición tras la iteración completa, o bien la alteración es mínima. Como se viene comentando, esta convergencia final puede no encontrarse nunca, como se enumera en las limitaciones de este ejemplo de algoritmo.
+				$$arg\:min\:S\sum_{i=1}^k\sum_{x\in{S_i}} \vert\vert{x-\mu_i}\vert\vert^2$$
+				
+				Consiste en resolver un \textbf{problema de minimización} donde buscamos el menor valor posible para \textbf{S}, siendo esta variable el número final de \textit{clusters} utilizados para categorizar los datos estudiados, y cumpliéndose que la sumatoria de la distancia euclídea de cada elemento con su centroide sea \textbf{mínima}.\\
+				
+				Recordemos que esta distancia que relaciona cada dato con su centroide más cercano puede entenderse como \textit{error}, ya que recae directamente sobre la disimilitud que existe entre ambos; por lo que se busca agrupar cada dato en la categoría con que mejor se relacione, utilizando el menor número posible de clases, como explicamos en la figura \ref{k-means-elbow-point}.\\
+				
+				Debe aclararse que $\mu_i$ representa sucesivamente a los centroides de cada una de las categorías utilizadas, por lo que para cada uno de los elementos estudiados, se estudia la diferencia con éstos. Adicionalmente, se aplica el cuadrado a esta distancia para añadir el estadístico \textbf{Error cuadrático medio} \cite{mean-squared-error} y así cumplir lo siguiente:
+				
+				\begin{itemize}
+					\item Todos los valores de esta magnitud son positivos.
+					\item Se premia a las distancias más pequeñas en contraposición con las más grandes, disminuyendo y aumentando estos valores, respectivamente.
+				\end{itemize}
 				
 		\section{Limitaciones}
 		
