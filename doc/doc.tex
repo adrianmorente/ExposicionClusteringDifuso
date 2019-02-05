@@ -34,11 +34,11 @@
 		
 			Entendemos por \textbf{agrupamiento clásico} a la técnica de clasificación de datos en distintas categorías según su similitud (o \textit{distancia}, si los entendemos como una representación de puntos en un espacio determinado).
 			
-			\begin{figure}[h]
+			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=0.5\textwidth]{clustering.png}
-				\label{clustering1}
 				\caption{Ilustración de agrupamiento clásico. \href{https://en.wikipedia.org/wiki/Cluster_analysis\#/media/File:Cluster-2.svg}{ \textit{(Wikimedia Creative Commons)}}}
+				\label{clustering1}
 			\end{figure}
 		
 			Se trata de una tarea principal en la labor de minería de datos a modo exploratorio, además de una técnica común para análisis estadístico de datos (aprendizaje automático, reconocimiento de patrones, análisis de imágenes, etc.).
@@ -60,38 +60,41 @@
 		
 			\begin{itemize}
 				\item \textbf{Basado en conectividad}: el criterio seguido para categorizar cada uno de los elementos se corresponde con la cercanía que tenga un determinado dato con el resto. Por ejemplo, si en un espacio tridimensional un dato sin categoría se encontrase a una distancia euclídea de 10 de un elemento de clase A, y a una distancia 5 de un dato de clase B; se inferiría que el elemento estudiado comparte más similitud con los datos de la segunda clase, y se categorizaría dentro de ella. Véase un ejemplo ilustrativo en la figura \ref{clustering-conectividad}.
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.5\textwidth]{clustering_conectividad.png}
+					\caption{Agrupamiento clásico - Modelo por conectividad \href{https://dashee87.github.io/images/scikit_clustering_13_1.png}{ \textit{(Dashee87.github.io)}}}
+					\label{clustering-conectividad}
+				\end{figure}
+				
 				\item \textbf{Basado en centroide}: en este caso, se seguiría una especie de modelo guiado por conectividad con la salvedad de que las distancias se calcularían respecto a cada uno de los centroides presentes en el modelo, y dicho elemento se clasificaría dentro de la clase a la que está asignado el centroide más cercano. Un ejemplo gráfico se puede visualizar en la figura \ref{clustering-centroide}.
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.5\textwidth]{clustering_centroide.png}
+					\caption{Agrupamiento clásico - Modelo basado en centroide \href{https://dashee87.github.io/images/scikit_clustering_5_0.png}{ \textit{(Dashee87.github.io)}}}
+					\label{clustering-centroide}
+				\end{figure}
+			
 				\item \textbf{Basado en distribuciones}: es el más estrechamente ligado a los modelos y fundamentos estadísticos. Los clústeres son definidos por objetos que pertenecen mayormente a la misma distribución. Producen modelos complejos con que capturar correlación y dependencia entre atributos de los datos estudiados. A menos que se establezcan unos límites sobre la complejidad del modelo, el \textit{sampling} de datos aleatorios de forma estadística puede afectar negativamente causando \textbf{sobreajuste}. Véase la ilustración de la figura \ref{clustering-distribuciones} para una visualización descriptiva.
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.5\textwidth]{clustering_distribuciones.png}
+					\caption{Agrupamiento clásico - Modelo basado en distribuciones \href{https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68}{ \textit{(Towards Data Science)}}}
+					\label{clustering-distribuciones}
+				\end{figure}
+				
 				\item \textbf{Basado en densidad}: en este modelo, los grupos son definidos a modo de áreas donde la densidad de datos es mayor que en el resto del conjunto. Los objetos que se encuentran esparcidos por el espacio sin acercarse a ningún área, se consideran \textit{ruido} o \textbf{puntos frontera}.
+				
+				\begin{figure}[h!]
+					\centering
+					\includegraphics[width=0.5\textwidth]{clustering_densidad.png}
+					\caption{Agrupamiento clásico - Modelo basado en densidad \href{https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68}{ \textit{(Towards Data Science)}}}
+					\label{clustering-densidad}
+				\end{figure}				
 			\end{itemize}
-		
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.5\textwidth]{clustering_conectividad.png}
-				\label{clustering-conectividad}
-				\caption{Agrupamiento clásico - Modelo por conectividad}
-			\end{figure}
-		
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.5\textwidth]{clustering_centroide.png}
-				\label{clustering-centroide}
-				\caption{Agrupamiento clásico - Modelo basado en centroide}
-			\end{figure}
-		
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.5\textwidth]{clustering_distribuciones.png}
-				\label{clustering-distribuciones}
-				\caption{Agrupamiento clásico - Modelo basado en distribuciones}
-			\end{figure}
-		
-			\begin{figure}
-				\centering
-				\includegraphics[width=0.5\textwidth]{clustering_densidad.png}
-				\label{clustering-densidad}
-				\caption{Agrupamiento clásico - Modelo basado en densidad}
-			\end{figure}
 		
 			Una vez se saben los distintos modelos que pueden existir a la hora de realizar un estudio basado en agrupamiento clásico, cabe destacar que a lo largo de este trabajo se utilizará el basado en centroide para ilustrar al respecto de los ejemplos propuestos.
 		
@@ -103,11 +106,11 @@
 		
 				El proceso de clasificación de datos es relativamente sencillo: reside en asignar clases a los datos no categorizados en función del centroide más cercano. Como se ha introducido, cada uno de estos centros representan una clase, a la que será asignado el dato en estudio según la distancia que los separe. Véase la figura \ref{clustering-algorithm}.
 			
-				\begin{figure}[h]
+				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=0.7\textwidth]{agrupamiento-clasico.png}
-					\label{clustering-algorithm}
 					\caption{Proceso de agrupamiento clásico}
+					\label{clustering-algorithm}
 				\end{figure}
 			
 				Describamos ligeramente el proceso ilustrado por dicha figura en el siguiente apartado.
@@ -118,11 +121,11 @@
 					
 					La decisión más importante aquí es el número de centroides que se utilizan, aunque esta decisión goza de fácil solución si repetimos el algoritmo para distinto valor de este número, como podemos ver en la siguiente imagen:
 					
-					\begin{figure}[h]
+					\begin{figure}[h!]
 						\centering
 						\includegraphics[width=0.9\textwidth]{k-means-oracle.png}
-						\label{k-means-elbow-point}
 						\caption{Inferencia del número idóneo de centroides a usar en un estudio de agrupamiento - \href{https://www.datascience.com/blog/k-means-clustering}{\textit{Oracle+DataScience}}}
+						\label{k-means-elbow-point}
 					\end{figure}
 					
 					La opción más general reside en repetir el proceso del algoritmo aumentando ligeramente el número de centroides usados, hasta llegar al punto de inflexión donde aumentar este valor no produce una mejora demasiado notable, dado que conforme se incrementa el valor \textit{K}, así lo hace la capacidad computacional requerida para tratar el problema.
@@ -165,11 +168,11 @@
 			\begin{itemize}
 				\item Cada uno de los datos del conjunto solo pueden pertenecer a un \textit{cluster} (o lo que es lo mismo, ser asignados a una clase). Lógicamente no se contempla la posibilidad de que un elemento pueda compartir similitud gradual con diversas categorías, lo que aleja el estudio de los datos de la posible solución más favorable o descriptiva.
 				
-				\begin{figure}[h]
+				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=0.5\textwidth]{Artboard1.jpg}
-					\label{clustering2}
 					\caption{Problema en la asignación de un dato en clustering clásico. ¿Qué categoría asignar al punto blanco?}
+					\label{clustering2}
 				\end{figure}
 			
 				\item Los mecanismos de exploración y clasificación de los datos no aseguran \textbf{convergencia}. El continuo cálculo de los centroides podría mantenerse eternamente efectuando las mismas operaciones repetitivas cuyo reposicionamiento de estos datos representativos alternase siempre de igual forma. Si existiese un mecanismo que permitiese relajar esta limitación, la inferencia extraída finalmente del estudio sería más descriptiva y ajustada a los datos reales.
@@ -205,11 +208,11 @@
 		
 			Si se compara este modelo con el anterior se puede observar que sólo se añade el grado de pertenencia, como se ha dicho anteriormente, por lo que en el proceso del algoritmo se debería incluir el cálculo de dichos grados de pertenencia que se pueden poner en forma matricial con lo que el algoritmo quedaría esquematizado como se muestra en la figura \ref{agrupamiento_difuso}.
 			
-			\begin{figure}[h]
+			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=0.7\textwidth]{agrupamiento-difuso.png}
-				\label{agrupamiento_difuso}
 				\caption{Proceso de agrupamiento difuso.}
+				\label{agrupamiento_difuso}
 			\end{figure}
 		
 			\subsection{Aplicación}
@@ -218,11 +221,11 @@
 				
 				Ahora, tras meter grados de pertenencia se puede resolver de manera trivial como se muestra en la siguiente figura:
 				
-				\begin{figure}[h]
+				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=0.5\textwidth]{clustering_difuso.jpg}
-					\label{clustering_difuso}
 					\caption{Ilustración de ejemplo de la función de pertenencia en Agrupamiento Difuso.}
+					\label{clustering_difuso}
 				\end{figure}
 			
 				Como se puede observar gráficamente en la figura \ref{clustering_difuso}, cada \textit{cluster} forma una función de pertenencia centrada en el \textit{centroide} del mismo. Conforme se aleja del \textit{centroide} la función de pertenencia disminuye y se puede observar como el dato que se encuentra entre los dos grupos toma el mismo valor de pertenencia en los dos grupos.\\
@@ -233,11 +236,11 @@
 				
 				Dicho esto, el dato del ejemplo de la figura se puede comparar con la \textit{furgoneta} con lo que se le podría dar un color naranja, mezcla entre rojo y amarillo. Dicho color sería más rojo si el dato se acercase al grupo rojo o más amarillo en caso contrario.
 				
-				\begin{figure}[h]
+				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=0.5\textwidth]{clustering_difuso_solucion.jpg}
-					\label{clustering_difuso_solucion}
 					\caption{Ilustración de ejemplo resuelta tras usar Agrupamiento Difuso.}
+					\label{clustering_difuso_solucion}
 				\end{figure}
 		
 		\section{Limitaciones}
@@ -248,11 +251,11 @@
 			
 			Para ver de forma más clara esta limitación, se ha decidido realizar la siguiente ilustración que añade un nuevo dato \textit{outlier} a los datos que ya se habían clasificado previamente.
 			
-			\begin{figure}[h]
+			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=0.5\textwidth]{problema-agrupamiento-difuso.jpg}
-				\label{clustering_difuso_problema}
 				\caption{Ilustración de ejemplo de la limitación del Agrupamiento Difuso.}
+				\label{clustering_difuso_problema}
 			\end{figure}
 			
 			Como se puede apreciar en la figura \ref{clustering_difuso_problema}, la función de pertenencia del conjunto de los puntos amarillos se tiene que extender de forma lógica para satisfacer la restricción de que la sumatoria de grados de pertenencia del punto más alejado tiene que ser 1. De esta manera, este punto, que a simple vista no pertenecería al grupo, entra a formar parte del núcleo o \textit{core} del conjunto. Esto implica que otros puntos ya no formarían parte del \textit{core} teniendo un menor grado de pertenencia en el grupo.\\
@@ -289,22 +292,22 @@
 		
 		Introducida esta nueva matriz (vector) posibilística, la estructura del algoritmo no sufre cambios significativos debido a que solo se agrega ese paso tal y como se puede observar en el siguiente diagrama de flujo.
 		
-		\begin{figure}[h]
+		\begin{figure}[h!]
 			\centering
 			\includegraphics[width=0.7\textwidth]{agrupamiento-posibilistico.png}
-			\label{agrupamiento_posibilistico}
 			\caption{Proceso de agrupamiento difuso posibilístico.}
+			\label{agrupamiento_posibilistico}
 		\end{figure}
 		
 		\subsection{Aplicación}
 			
 			Volviendo al ejemplo sobre el que se ha estado trabajando y poniendo casuísticas para mostrar las limitaciones de los anteriores modelos, se puede ver en la figura \ref{clustering_posibilistico} como este último modelo soluciona el problema que tenía el anterior.
 			
-			\begin{figure}[h]
+			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=0.5\textwidth]{clustering-posibilistico.jpg}
-				\label{clustering_posibilistico}
 				\caption{Ilustración de ejemplo de la mejora del Agrupamiento Difuso Posibilístico.}
+				\label{clustering_posibilistico}
 			\end{figure}
 		
 			El \textit{outlier} ya no forma parte del \textit{core} de ningún conjunto haciendo que el modelo pueda clasificar de mejor manera a los elementos.\\
