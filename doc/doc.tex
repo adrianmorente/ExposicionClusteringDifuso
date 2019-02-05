@@ -59,11 +59,41 @@
 			Durante el estudio de conjuntos de datos basado en agrupamientos y/o categorización, se pueden seguir diversos modelos que condicionarán el contenido de los grupos resultantes. Esto es, el resultado diferirá en función del criterio seguido para asignar una categoría u otra a cada uno de los datos presentes en el conjunto. Veamos algunos de los modelos posibles:
 		
 			\begin{itemize}
-				\item \textbf{Conectividad}: el criterio seguido para categorizar cada uno de los elementos se corresponde con la cercanía que tenga un determinado dato con el resto. Por ejemplo, si en un espacio tridimensional un dato sin categoría se encontrase a una distancia euclídea de 10 de un elemento de clase A, y a una distancia 5 de un dato de clase B; se inferiría que el elemento estudiado comparte más similitud con los datos de la segunda clase, y se categorizaría dentro de ella.
-				\item \textbf{Basado en centroide}: en este caso, se seguiría una especie de modelo guiado por conectividad con la salvedad de que las distancias se calcularían respecto a cada uno de los centroides presentes en el modelo, y dicho elemento se clasificaría dentro de la clase a la que está asignado el centroide más cercano.
-				\item \textbf{Basado en distribuciones}: es el más estrechamente ligado a los modelos y fundamentos estadísticos. Los clústeres son definidos por objetos que pertenecen mayormente a la misma distribución. Producen modelos complejos con que capturar correlación y dependencia entre atributos de los datos estudiados. A menos que se establezcan unos límites sobre la complejidad del modelo, el \textit{sampling} de datos aleatorios de forma estadística puede afectar negativamente causando \textbf{sobreajuste}.
+				\item \textbf{Basado en conectividad}: el criterio seguido para categorizar cada uno de los elementos se corresponde con la cercanía que tenga un determinado dato con el resto. Por ejemplo, si en un espacio tridimensional un dato sin categoría se encontrase a una distancia euclídea de 10 de un elemento de clase A, y a una distancia 5 de un dato de clase B; se inferiría que el elemento estudiado comparte más similitud con los datos de la segunda clase, y se categorizaría dentro de ella. Véase un ejemplo ilustrativo en la figura \ref{clustering-conectividad}.
+				\item \textbf{Basado en centroide}: en este caso, se seguiría una especie de modelo guiado por conectividad con la salvedad de que las distancias se calcularían respecto a cada uno de los centroides presentes en el modelo, y dicho elemento se clasificaría dentro de la clase a la que está asignado el centroide más cercano. Un ejemplo gráfico se puede visualizar en la figura \ref{clustering-centroide}.
+				\item \textbf{Basado en distribuciones}: es el más estrechamente ligado a los modelos y fundamentos estadísticos. Los clústeres son definidos por objetos que pertenecen mayormente a la misma distribución. Producen modelos complejos con que capturar correlación y dependencia entre atributos de los datos estudiados. A menos que se establezcan unos límites sobre la complejidad del modelo, el \textit{sampling} de datos aleatorios de forma estadística puede afectar negativamente causando \textbf{sobreajuste}. Véase la ilustración de la figura \ref{clustering-distribuciones} para una visualización descriptiva.
 				\item \textbf{Basado en densidad}: en este modelo, los grupos son definidos a modo de áreas donde la densidad de datos es mayor que en el resto del conjunto. Los objetos que se encuentran esparcidos por el espacio sin acercarse a ningún área, se consideran \textit{ruido} o \textbf{puntos frontera}.
 			\end{itemize}
+		
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.5\textwidth]{clustering_conectividad.png}
+				\label{clustering-conectividad}
+				\caption{Agrupamiento clásico - Modelo por conectividad}
+			\end{figure}
+		
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.5\textwidth]{clustering_centroide.png}
+				\label{clustering-centroide}
+				\caption{Agrupamiento clásico - Modelo basado en centroide}
+			\end{figure}
+		
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.5\textwidth]{clustering_distribuciones.png}
+				\label{clustering-distribuciones}
+				\caption{Agrupamiento clásico - Modelo basado en distribuciones}
+			\end{figure}
+		
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.5\textwidth]{clustering_densidad.png}
+				\label{clustering-densidad}
+				\caption{Agrupamiento clásico - Modelo basado en densidad}
+			\end{figure}
+		
+			Una vez se saben los distintos modelos que pueden existir a la hora de realizar un estudio basado en agrupamiento clásico, cabe destacar que a lo largo de este trabajo se utilizará el basado en centroide para ilustrar al respecto de los ejemplos propuestos.
 		
 		\section{Ejemplo: \textit{K-medias}}
 		
